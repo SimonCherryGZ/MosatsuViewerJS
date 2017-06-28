@@ -5,17 +5,24 @@
     <title>妄撮</title>
     <style type="text/css">
         .card{
-            width:320px; margin:10px auto 20px auto; min-height:300px;
+            margin:10px auto 20px auto;
+            width:320px;
+            min-height:300px;
+            border: 1px solid #F00000;
         }
         .hint{
-            text-align:center; height:32px; line-height:32px; font-weight:bold; margin-top:50px
+            text-align:center;
+            height:32px; line-height:32px;
+            font-weight:bold;
+            margin-top:50px;
+            border: 1px solid #0000F0;
         }
     </style>
 </head>
 
 <body>
     <h1>这是一个标题</h1>
-    <div id="main">
+    <div class="main">
         <div class="hint">触摸图片，<a href="javascript:void(0)" onClick="window.location.reload()">重置</a></div>
         <div class="card">
             <canvas id="myCanvas"></canvas>

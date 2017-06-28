@@ -2,26 +2,35 @@
  * Created by Simon on 2017/6/27.
  */
 window.onload = function () {
-    // alert("Hello");
-    // // var c = document.getElementById('myCanvas');
-    // // var ctx = c.getContext('2d');
-    // // ctx.fillStyle="#FF0000";
-    // // ctx.fillRect(0,0,150,75);
-
     var bodyStyle = document.body.style;
     bodyStyle.mozUserSelect = 'none';
     bodyStyle.webkitUserSelect = 'none';
 
+    initCanvas();
+};
+
+window.addEventListener("resize", function () {
+    initCanvas();
+});
+
+function initCanvas() {
     var imgBottom = new Image();
     var canvas = document.querySelector('canvas');
     canvas.style.backgroundColor = 'transparent';
     canvas.style.position = 'absolute';
     imgBottom.src = '../images/sample1_a.jpg';
+    var imgScale = 1.0;
 
     imgBottom.addEventListener('load', function() {
         var ctx;
-        var w = imgBottom.width,
-            h = imgBottom.height;
+        var imgWidth = imgBottom.width,
+            imgHeight = imgBottom.height;
+
+        var ratio = imgWidth / imgHeight;
+
+        var windowWidth = window.innerHeight * imgScale * ratio,
+            windowHeight = window.innerHeight * imgScale;
+
         var offsetX = canvas.offsetLeft,
             offsetY = canvas.offsetTop;
         var mouseDown = false;
@@ -30,7 +39,7 @@ window.onload = function () {
             var imgTop = new Image();
             imgTop.src = '../images/sample1_a.jpg';
             ctx.fillStyle = 'gray';
-            ctx.drawImage(imgTop, 0, 0);
+            ctx.drawImage(imgTop, 0, 0, windowWidth, windowHeight);
         }
 
         function eventDown(e){
@@ -57,12 +66,13 @@ window.onload = function () {
             }
         }
 
-        canvas.width = w;
-        canvas.height = h;
+        canvas.width = windowWidth;
+        canvas.height = windowHeight;
         canvas.style.backgroundImage = 'url(../images/sample1_b.jpg)';
+        canvas.style.backgroundSize = windowWidth + "px " + windowHeight + "px";
         ctx = canvas.getContext('2d');
         ctx.fillStyle = 'transparent';
-        ctx.fillRect(0, 0, w, h);
+        ctx.fillRect(0, 0, windowWidth, windowHeight);
         layer(ctx);
 
         ctx.globalCompositeOperation = 'destination-out';
@@ -74,4 +84,4 @@ window.onload = function () {
         canvas.addEventListener('mouseup', eventUp);
         canvas.addEventListener('mousemove', eventMove);
     });
-};
+}
