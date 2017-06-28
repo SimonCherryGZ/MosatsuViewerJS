@@ -6,6 +6,7 @@ var ctx;
 var imgTop;
 var imgBottom;
 var imgScale = 0.6;
+var paintSize = 10;
 var mouseDown = false;
 var dstWidth;
 var dstHeight;
@@ -87,6 +88,8 @@ function recalculate() {
     // }
     dstHeight = screenHeight * imgScale;
     dstWidth = dstHeight * ratio;
+
+    paintSize = dstWidth / 20;
 }
 
 function layer(dstWidth, dstHeight) {
@@ -113,7 +116,7 @@ function eventMove(e){
         var x = (e.clientX + document.body.scrollLeft || e.pageX) - offsetX || 0,
             y = (e.clientY + document.body.scrollTop || e.pageY) - offsetY || 0;
         ctx.beginPath();
-        ctx.arc(x, y, 10, 0, Math.PI * 2);
+        ctx.arc(x, y, paintSize, 0, Math.PI * 2);
         ctx.fill();
         // ctx.stroke();
     }
