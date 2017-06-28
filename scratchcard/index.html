@@ -2,29 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>妄撮</title>
     <style type="text/css">
-        .card{
-            margin:10px auto 20px auto;
-            width:320px;
-            min-height:300px;
-            border: 1px solid #F00000;
-        }
         .hint{
             text-align:center;
             height:32px; line-height:32px;
             font-weight:bold;
-            margin-top:50px;
+
             border: 1px solid #0000F0;
+        }
+        #container{
+            margin:0 auto;
+            width: 100px;
+
+            border: 1px solid #00F000;
+        }
+        #myCanvas{
+            border: 1px solid #F00000;
         }
     </style>
 </head>
 
 <body>
-    <h1>这是一个标题</h1>
+    <h1>标题</h1>
     <div class="main">
-        <div class="hint">触摸图片，<a href="javascript:void(0)" onClick="window.location.reload()">重置</a></div>
-        <div class="card">
+        <div class="hint">触摸图片 | <a href="javascript:void(0)" onClick="window.location.reload()">重置</a></div>
+        <div id="container">
             <canvas id="myCanvas"></canvas>
         </div>
     </div>

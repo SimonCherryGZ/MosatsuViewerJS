@@ -19,17 +19,31 @@ function initCanvas() {
     canvas.style.backgroundColor = 'transparent';
     canvas.style.position = 'absolute';
     imgBottom.src = '../images/sample1_a.jpg';
-    var imgScale = 1.0;
+    var imgScale = 0.6;
 
     imgBottom.addEventListener('load', function() {
         var ctx;
-        var imgWidth = imgBottom.width,
-            imgHeight = imgBottom.height;
+        var srcWidth = imgBottom.width,
+            srcHeight = imgBottom.height;
+        var ratio = srcWidth / srcHeight;
 
-        var ratio = imgWidth / imgHeight;
+        var screenWidth = window.innerWidth;
+        var screenHeight = window.innerHeight;
 
-        var windowWidth = window.innerHeight * imgScale * ratio,
-            windowHeight = window.innerHeight * imgScale;
+        var dstWidth;
+        var dstHeight;
+        // if (screenWidth >= screenHeight) {
+        //     dstWidth = screenWidth * imgScale;
+        //     dstHeight = dstWidth / ratio;
+        // } else {
+        //     dstHeight = screenHeight * imgScale;
+        //     dstWidth = dstHeight * ratio;
+        // }
+        dstHeight = screenHeight * imgScale;
+        dstWidth = dstHeight * ratio;
+
+        var container = document.getElementById("container");
+        container.style.width = (dstWidth + 2) + "px";
 
         var offsetX = canvas.offsetLeft,
             offsetY = canvas.offsetTop;
@@ -39,7 +53,7 @@ function initCanvas() {
             var imgTop = new Image();
             imgTop.src = '../images/sample1_a.jpg';
             ctx.fillStyle = 'gray';
-            ctx.drawImage(imgTop, 0, 0, windowWidth, windowHeight);
+            ctx.drawImage(imgTop, 0, 0, dstWidth, dstHeight);
         }
 
         function eventDown(e){
@@ -66,13 +80,13 @@ function initCanvas() {
             }
         }
 
-        canvas.width = windowWidth;
-        canvas.height = windowHeight;
+        canvas.width = dstWidth;
+        canvas.height = dstHeight;
         canvas.style.backgroundImage = 'url(../images/sample1_b.jpg)';
-        canvas.style.backgroundSize = windowWidth + "px " + windowHeight + "px";
+        canvas.style.backgroundSize = dstWidth + "px " + dstHeight + "px";
         ctx = canvas.getContext('2d');
         ctx.fillStyle = 'transparent';
-        ctx.fillRect(0, 0, windowWidth, windowHeight);
+        ctx.fillRect(0, 0, dstWidth, dstHeight);
         layer(ctx);
 
         ctx.globalCompositeOperation = 'destination-out';
