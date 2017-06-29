@@ -165,3 +165,9 @@ function updateUrl(url, key) {
         }
     }
 }
+
+function onPaintSizeChange() {
+    var value = document.getElementById('paintSizeRange').value ;
+    console.debug("paint size: " + value);
+    paintSize = value * 2;
+}

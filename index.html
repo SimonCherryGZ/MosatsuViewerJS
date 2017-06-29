@@ -9,25 +9,34 @@
             text-align:center;
             height:32px; line-height:32px;
             font-weight:bold;
-
             border: 1px solid #0000F0;
+        }
+        .paint{
+            text-align:center;
+            margin-top: 20px;
+            border: 1px solid #F0F000;
         }
         #container{
             margin:0 auto;
             width: 100px;
-
             border: 1px solid #00F000;
         }
         #myCanvas{
+            margin-top: 20px;
             border: 1px solid #F00000;
         }
     </style>
 </head>
 
 <body>
-    <h1>标题</h1>
+    <h1>妄撮</h1>
     <div class="main">
         <div class="hint">触摸图片 | <a href="javascript:void(0)" onClick="window.location.href=updateUrl(window.location.href);">重置</a></div>
+        <div class="paint">
+            笔触: <label>
+            <input id="paintSizeRange" type="range" name="points" min="1" max="10" value="5" onchange="onPaintSizeChange()">
+            </label>
+        </div>
         <div id="container">
             <canvas id="myCanvas"></canvas>
         </div>
