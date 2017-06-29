@@ -29,10 +29,10 @@ function initImage() {
     canvas = document.querySelector('canvas');
 
     imgTop = new Image();
-    imgTop.src = '../images/sample1_a.jpg';
+    imgTop.src = 'images/sample1_a.jpg';
 
     imgBottom = new Image();
-    imgBottom.src = '../images/sample1_b.jpg';
+    imgBottom.src = 'images/sample1_b.jpg';
 
     imgBottom.addEventListener('load', function() {
         initCanvas();
@@ -50,7 +50,7 @@ function initCanvas() {
 
     canvas.width = dstWidth;
     canvas.height = dstHeight;
-    canvas.style.backgroundImage = 'url(../images/sample1_b.jpg)';
+    canvas.style.backgroundImage = 'url(images/sample1_b.jpg)';
     canvas.style.backgroundSize = dstWidth + "px " + dstHeight + "px";
 
     offsetX = canvas.offsetLeft;
