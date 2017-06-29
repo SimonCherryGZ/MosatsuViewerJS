@@ -60,15 +60,6 @@ function initCanvas() {
     ctx.fillStyle = 'transparent';
     ctx.fillRect(0, 0, dstWidth, dstHeight);
     layer(dstWidth, dstHeight);
-    // ctx.globalCompositeOperation = 'destination-out';
-    //
-    // canvas.addEventListener('touchstart', eventDown);
-    // canvas.addEventListener('touchend', eventUp);
-    // canvas.addEventListener('touchmove', eventMove);
-    // canvas.addEventListener('mousedown', eventDown);
-    // canvas.addEventListener('mouseup', eventUp);
-    // canvas.addEventListener('mousemove', eventMove);
-    // canvas.addEventListener('mouseout', eventUp);
 }
 
 function recalculate() {
@@ -93,13 +84,10 @@ function recalculate() {
 }
 
 function layer(dstWidth, dstHeight) {
-    // ctx.fillStyle = 'gray';
-    // ctx.drawImage(imgTop, 0, 0, dstWidth, dstHeight);
     if (imgTop.complete) {
         console.debug("imgTop complete");
         ctx.fillStyle = 'gray';
         ctx.drawImage(imgTop, 0, 0, dstWidth, dstHeight);
-
         ctx.globalCompositeOperation = 'destination-out';
 
         canvas.addEventListener('touchstart', eventDown);
@@ -140,6 +128,15 @@ function eventMove(e){
         ctx.fill();
         // ctx.stroke();
     }
+}
+
+function resetCanvas() {
+    canvas.width = dstWidth;
+    canvas.height = dstHeight;
+
+    ctx.fillStyle = 'gray';
+    ctx.drawImage(imgTop, 0, 0, dstWidth, dstHeight);
+    ctx.globalCompositeOperation = 'destination-out';
 }
 
 function updateUrl(url, key) {
