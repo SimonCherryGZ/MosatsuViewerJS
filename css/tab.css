@@ -1,0 +1,36 @@
+#content {
+    width: 100%;
+    height: 100%;
+}
+
+#tab_bar {
+    width: 100%;
+    height: 30px;
+    float: left;
+}
+#tab_bar ul {
+    padding: 0px;
+    margin: 0px;
+    height: 30px;
+    text-align: center;
+}
+
+#tab_bar li {
+    list-style-type: none;
+    float: left;
+    width: 50%;
+    height: 30px;
+    background-color: gray;
+}
+
+.tab_css {
+    width: 100%;
+    height: 100%;
+    background-color: orange;
+    display: none;
+    float: left;
+}
+
+.upload {
+    display: inline-block;
+}

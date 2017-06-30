@@ -1,49 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>妄撮</title>
-    <style type="text/css">
-        .hint{
-            text-align:center;
-            height:32px; line-height:32px;
-            font-weight:bold;
-            border: 1px solid #0000F0;
-        }
-        .paint{
-            text-align:center;
-            margin-top: 20px;
-            border: 1px solid #F0F000;
-        }
-        #container{
-            margin:0 auto;
-            width: 100px;
-            border: 1px solid #00F000;
-        }
-        #myCanvas{
-            margin-top: 20px;
-            border: 1px solid #F00000;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="css/tab.css" />
+    <link rel="stylesheet" type="text/css" href="css/card.css" />
+    <link rel="stylesheet" type="text/css" href="css/upload.css" />
 </head>
 
 <body>
-    <h1>妄撮</h1>
-    <div class="main">
-        <!--<div class="hint">触摸图片 | <a href="javascript:void(0)" onClick="window.location.href=updateUrl(window.location.href);">重置</a></div>-->
-        <div class="hint">触摸图片 | <a href="javascript:void(0)" onClick="resetCanvas()">重置</a></div>
-        <div class="paint">
-            笔触: <label>
-            <input id="paintSizeRange" type="range" name="points" min="1" max="10" value="5" onchange="onPaintSizeChange()">
+<div id="content">
+    <div id="tab_bar">
+        <ul>
+            <li id="tab1" onclick="switchTab(1)" style="background-color: orange">
+                妄撮
+            </li>
+            <li id="tab2" onclick="switchTab(2)">
+                设置
+            </li>
+        </ul>
+    </div>
+
+    <div class="tab_css" id="tab1_content" style="display: block">
+        <div class="card">
+            <div class="hint">触摸图片 | <a href="javascript:void(0)" onClick="resetCanvas()">重置</a></div>
+            <div class="paint">
+                笔触: <label>
+                <input id="paintSizeRange" type="range" name="points" min="1" max="10" value="5" onchange="onPaintSizeChange()">
             </label>
-        </div>
-        <div id="container">
-            <canvas id="myCanvas"></canvas>
+            </div>
+            <div id="container">
+                <canvas id="myCanvas"></canvas>
+            </div>
         </div>
     </div>
 
-    <script type="text/javascript" src="script/card.js"></script>
+    <div class="tab_css" id="tab2_content">
+        <div class="upload">
+            <p>
+                <label>顶层图片：</label>
+                <input type="file" id="file_input1" />
+            </p>
+            <div id="result1">
+                <!-- 这里用来显示读取结果 -->
+            </div>
+        </div>
+        <div class="upload">
+            <p>
+                <label>底层图片：</label>
+                <input type="file" id="file_input2" />
+            </p>
+            <div id="result2">
+                <!-- 这里用来显示读取结果 -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="script/tab.js"></script>
+<script type="text/javascript" src="script/card.js"></script>
+<script type="text/javascript" src="script/upload.js"></script>
 </body>
 
 </html>

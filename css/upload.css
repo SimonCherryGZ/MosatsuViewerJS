@@ -1,0 +1,9 @@
+.upload{
+    width:49%;
+    margin:10px auto 0 auto;
+    min-height:300px;
+    overflow:hidden
+}
+#result{
+    margin-top:10px
+}

@@ -1,0 +1,20 @@
+.hint{
+    text-align:center;
+    height:32px; line-height:32px;
+    font-weight:bold;
+    border: 1px solid #0000F0;
+}
+.paint{
+    text-align:center;
+    margin-top: 20px;
+    border: 1px solid #F0F000;
+}
+#container{
+    margin:0 auto;
+    width: 100px;
+    border: 1px solid #00F000;
+}
+#myCanvas{
+    margin-top: 20px;
+    border: 1px solid #F00000;
+}
