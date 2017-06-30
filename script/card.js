@@ -12,6 +12,7 @@ var dstWidth;
 var dstHeight;
 var offsetX;
 var offsetY;
+var pixelRatio = 1.0;
 
 window.onload = function () {
     var bodyStyle = document.body.style;
@@ -28,6 +29,19 @@ window.addEventListener("resize", function () {
 function initImage() {
     canvas = document.querySelector('canvas');
     ctx = canvas.getContext('2d');
+
+    // 屏幕的设备像素比
+    var devicePixelRatio = window.devicePixelRatio || 1;
+
+    // 浏览器在渲染canvas之前存储画布信息的像素比
+    var backingStoreRatio = ctx.webkitBackingStorePixelRatio ||
+        ctx.mozBackingStorePixelRatio ||
+        ctx.msBackingStorePixelRatio ||
+        ctx.oBackingStorePixelRatio ||
+        ctx.backingStorePixelRatio || 1;
+
+    pixelRatio = devicePixelRatio / backingStoreRatio;
+    console.debug("pixelRatio: " + pixelRatio);
 
     imgTop = new Image();
     imgTop.src = 'images/sample1_a.jpg';
@@ -49,17 +63,16 @@ function initCanvas() {
     canvas.style.backgroundColor = 'transparent';
     canvas.style.position = 'absolute';
 
-    canvas.width = dstWidth;
-    canvas.height = dstHeight;
-    // canvas.style.backgroundImage = 'url(images/sample1_b.jpg)';
+    canvas.width = dstWidth * pixelRatio;
+    canvas.height = dstHeight * pixelRatio;
+    canvas.style.width = dstWidth + "px";  // 注意不要漏了px
+    canvas.style.height = dstHeight + "px";
     canvas.style.backgroundImage = 'url(' + imgBottom.src + ')';
     canvas.style.backgroundSize = dstWidth + "px " + dstHeight + "px";
 
     offsetX = canvas.offsetLeft;
     offsetY = canvas.offsetTop;
 
-    // ctx.fillStyle = 'transparent';
-    // ctx.fillRect(0, 0, dstWidth, dstHeight);
     layer(dstWidth, dstHeight);
 }
 
@@ -88,7 +101,7 @@ function layer(dstWidth, dstHeight) {
     if (imgTop.complete) {
         console.debug("imgTop complete");
         ctx.fillStyle = 'gray';
-        ctx.drawImage(imgTop, 0, 0, dstWidth, dstHeight);
+        ctx.drawImage(imgTop, 0, 0, dstWidth * pixelRatio, dstHeight * pixelRatio);
         ctx.globalCompositeOperation = 'destination-out';
 
         canvas.addEventListener('touchstart', eventDown);
@@ -125,17 +138,17 @@ function eventMove(e){
         var x = (e.clientX + document.body.scrollLeft || e.pageX) - offsetX || 0,
             y = (e.clientY + document.body.scrollTop || e.pageY) - offsetY || 0;
         ctx.beginPath();
-        ctx.arc(x, y, paintSize, 0, Math.PI * 2);
+        ctx.arc(x * pixelRatio, y * pixelRatio, paintSize * pixelRatio, 0, Math.PI * 2);
         ctx.fill();
     }
 }
 
 function resetCanvas() {
-    canvas.width = dstWidth;
-    canvas.height = dstHeight;
+    canvas.width = dstWidth * pixelRatio;
+    canvas.height = dstHeight * pixelRatio;
 
     ctx.fillStyle = 'gray';
-    ctx.drawImage(imgTop, 0, 0, dstWidth, dstHeight);
+    ctx.drawImage(imgTop, 0, 0, dstWidth * pixelRatio, dstHeight * pixelRatio);
     ctx.globalCompositeOperation = 'destination-out';
 }
 
